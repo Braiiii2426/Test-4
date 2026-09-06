@@ -219,6 +219,7 @@ animation: lineGlow 5s ease-in-out infinite;
 width: 45%;
 
 top: 20%;
+
 left: -10%;
 
 transform: rotate(-18deg);
@@ -230,6 +231,7 @@ transform: rotate(-18deg);
 width: 35%;
 
 right: -5%;
+
 top: 65%;
 
 transform: rotate(22deg);
@@ -243,6 +245,7 @@ animation-delay: 2s;
 width: 30%;
 
 left: 20%;
+
 bottom: 10%;
 
 transform: rotate(-8deg);
@@ -2395,7 +2398,6 @@ scroll-behavior: auto !important;
 
 /* ============================================================
 37. MUSIC PLAYER
-SMALL GLOWING RIGHT-SIDE BOX
 ============================================================ */
 
 .music-player {
@@ -2403,58 +2405,50 @@ SMALL GLOWING RIGHT-SIDE BOX
 position: fixed;
 
 right: 24px;
+
 bottom: 24px;
 
-width: 245px;
-min-height: 82px;
+width: 285px;
 
-padding: 11px;
-
-z-index: 1000;
+padding: 16px;
 
 border:
 1px solid
-rgba(199,166,255,.32);
+rgba(199,166,255,.25);
 
-border-radius: 15px;
+border-radius: 18px;
 
 background:
 linear-gradient(
 145deg,
-rgba(12,7,28,.96),
-rgba(29,15,51,.93)
+rgba(22,12,42,.94),
+rgba(8,12,30,.96)
 );
 
+backdrop-filter: blur(18px);
+
+-webkit-backdrop-filter: blur(18px);
+
 box-shadow:
-
-0 12px 35px
-rgba(0,0,0,.45),
-
 0 0 12px
-rgba(155,108,255,.16),
+rgba(155,108,255,.15),
 
 0 0 35px
-rgba(155,108,255,.08),
+rgba(155,108,255,.10),
 
-inset 0 1px 0
-rgba(255,255,255,.07);
+inset 0 1px
+rgba(255,255,255,.06);
 
-backdrop-filter:
-blur(18px);
-
--webkit-backdrop-filter:
-blur(18px);
+z-index: 500;
 
 overflow: hidden;
 
 transition:
-border-color .4s ease,
+transform .4s ease,
 box-shadow .4s ease,
-transform .3s ease;
+border-color .4s ease;
 }
 
-
-/* Thin glowing top edge */
 
 .music-player::before {
 
@@ -2463,28 +2457,30 @@ content: "";
 position: absolute;
 
 top: 0;
-left: 12px;
-right: 12px;
 
-height: 1px;
+left: 12%;
+
+width: 76%;
+
+height: 2px;
 
 background:
 linear-gradient(
 90deg,
 transparent,
-rgba(216,194,255,.9),
+var(--light-purple),
+var(--purple),
 transparent
 );
 
 box-shadow:
-0 0 8px
-rgba(155,108,255,.8);
+0 0 8px var(--purple),
+0 0 20px var(--purple);
 
 opacity: .7;
+
 }
 
-
-/* Internal purple glow */
 
 .music-player::after {
 
@@ -2492,45 +2488,201 @@ content: "";
 
 position: absolute;
 
-width: 130px;
-height: 130px;
+width: 170px;
 
-right: -55px;
-bottom: -70px;
+height: 170px;
+
+right: -80px;
+
+bottom: -100px;
 
 border-radius: 50%;
 
 background:
 radial-gradient(
 circle,
-rgba(155,108,255,.18),
+rgba(155,108,255,.22),
 transparent 70%
 );
 
-filter: blur(12px);
+filter: blur(18px);
 
 pointer-events: none;
 }
 
 
-.music-player.music-playing {
+.music-player:hover {
+
+transform: translateY(-3px);
 
 border-color:
-rgba(199,166,255,.55);
+rgba(199,166,255,.45);
 
 box-shadow:
-
-0 12px 35px
-rgba(0,0,0,.48),
-
 0 0 15px
-rgba(155,108,255,.28),
+rgba(155,108,255,.25),
 
-0 0 40px
-rgba(155,108,255,.13),
+0 0 45px
+rgba(155,108,255,.14),
 
-inset 0 1px 0
-rgba(255,255,255,.09);
+inset 0 1px
+rgba(255,255,255,.08);
+}
+
+
+/* ============================================================
+MUSIC WAVE
+============================================================ */
+
+.music-wave {
+
+height: 25px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 3px;
+
+margin:
+0
+0
+10px;
+
+padding:
+0
+10px;
+}
+
+
+.music-wave span {
+
+width: 3px;
+
+height: 4px;
+
+border-radius: 10px;
+
+background:
+linear-gradient(
+to top,
+var(--purple),
+var(--light-purple)
+);
+
+box-shadow:
+0 0 5px var(--purple),
+0 0 10px rgba(155,108,255,.5);
+
+opacity: .55;
+
+transform-origin: center;
+
+}
+
+
+.music-playing .music-wave span {
+
+animation:
+musicWave
+.8s
+ease-in-out
+infinite;
+}
+
+
+.music-wave span:nth-child(1) {
+animation-delay: -.7s;
+}
+
+.music-wave span:nth-child(2) {
+animation-delay: -.5s;
+}
+
+.music-wave span:nth-child(3) {
+animation-delay: -.3s;
+}
+
+.music-wave span:nth-child(4) {
+animation-delay: -.6s;
+}
+
+.music-wave span:nth-child(5) {
+animation-delay: -.2s;
+}
+
+.music-wave span:nth-child(6) {
+animation-delay: -.4s;
+}
+
+.music-wave span:nth-child(7) {
+animation-delay: -.1s;
+}
+
+.music-wave span:nth-child(8) {
+animation-delay: -.55s;
+}
+
+.music-wave span:nth-child(9) {
+animation-delay: -.25s;
+}
+
+.music-wave span:nth-child(10) {
+animation-delay: -.45s;
+}
+
+.music-wave span:nth-child(11) {
+animation-delay: -.15s;
+}
+
+.music-wave span:nth-child(12) {
+animation-delay: -.65s;
+}
+
+.music-wave span:nth-child(13) {
+animation-delay: -.35s;
+}
+
+.music-wave span:nth-child(14) {
+animation-delay: -.5s;
+}
+
+.music-wave span:nth-child(15) {
+animation-delay: -.2s;
+}
+
+.music-wave span:nth-child(16) {
+animation-delay: -.4s;
+}
+
+.music-wave span:nth-child(17) {
+animation-delay: -.1s;
+}
+
+.music-wave span:nth-child(18) {
+animation-delay: -.6s;
+}
+
+
+@keyframes musicWave {
+
+0%, 100% {
+
+height: 4px;
+
+opacity: .45;
+
+}
+
+50% {
+
+height: 22px;
+
+opacity: 1;
+
+}
 }
 
 
@@ -2542,125 +2694,72 @@ MUSIC PLAYER TOP
 
 position: relative;
 
+display: flex;
+
+align-items: center;
+
+gap: 12px;
+
 z-index: 2;
+}
+
+
+/* ============================================================
+MUSIC DISC
+============================================================ */
+
+.music-disc {
+
+width: 48px;
+
+height: 48px;
+
+flex-shrink: 0;
+
+border-radius: 50%;
 
 display: flex;
 
 align-items: center;
 
-gap: 9px;
-
-min-width: 0;
-}
-
-
-/* ============================================================
-VINYL DISC
-============================================================ */
-
-.music-disc {
-
-position: relative;
-
-width: 42px;
-height: 42px;
-
-flex:
-0 0
-42px;
-
-border-radius: 50%;
+justify-content: center;
 
 background:
 radial-gradient(
 circle,
-#d8c2ff 0 8%,
-#261638 9% 15%,
-#0a0710 16% 45%,
-#35204f 46% 49%,
-#10091a 50% 100%
+#24133e 0 12%,
+#090b18 13% 25%,
+#26163e 26% 29%,
+#090b18 30% 45%,
+#211238 46% 55%,
+#080a16 56% 100%
 );
 
 border:
 1px solid
-rgba(216,194,255,.32);
+rgba(199,166,255,.3);
 
 box-shadow:
+0 0 8px
+rgba(155,108,255,.25),
 
-0 0 9px
-rgba(155,108,255,.28),
+0 0 18px
+rgba(155,108,255,.12);
 
-inset 0 0 8px
-rgba(255,255,255,.04);
-
-transition:
-box-shadow .4s ease;
-}
-
-
-.music-disc::before {
-
-content: "";
-
-position: absolute;
-
-inset: 5px;
-
-border-radius: 50%;
-
-border:
-1px solid
-rgba(216,194,255,.08);
-}
-
-
-.music-disc::after {
-
-content: "";
-
-position: absolute;
-
-width: 6px;
-height: 6px;
-
-left: 50%;
-top: 50%;
-
-transform:
-translate(-50%, -50%);
-
-border-radius: 50%;
-
-background:
-#0b0614;
-
-border:
-1px solid
-rgba(216,194,255,.55);
-
-z-index: 3;
 }
 
 
 .music-playing .music-disc {
 
 animation:
-musicDiscSpin
-4s
+discSpin
+5s
 linear
 infinite;
-
-box-shadow:
-
-0 0 12px
-rgba(199,166,255,.65),
-
-0 0 24px
-rgba(155,108,255,.18);
 }
 
 
-@keyframes musicDiscSpin {
+@keyframes discSpin {
 
 from {
 transform: rotate(0deg);
@@ -2670,6 +2769,37 @@ to {
 transform: rotate(360deg);
 }
 
+}
+
+
+.music-disc-center {
+
+width: 12px;
+
+height: 12px;
+
+border-radius: 50%;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+background:
+radial-gradient(
+circle,
+var(--light-purple),
+var(--purple)
+);
+
+color: white;
+
+font-size: 6px;
+
+box-shadow:
+0 0 8px
+var(--purple);
 }
 
 
@@ -2691,16 +2821,14 @@ text-align: left;
 
 display: block;
 
-margin-bottom: 2px;
+font-size: 7px;
 
-font-family: var(--sans);
-
-font-size: 6px;
-
-letter-spacing: 1.8px;
+letter-spacing: 2px;
 
 color:
-rgba(216,194,255,.48);
+rgba(216,194,255,.5);
+
+margin-bottom: 3px;
 }
 
 
@@ -2710,36 +2838,30 @@ font-family: var(--serif);
 
 font-size: 17px;
 
-line-height: 1;
-
 font-weight: 600;
 
-color: #ffffff;
+line-height: 1.15;
 
-white-space: nowrap;
-
-overflow: hidden;
-
-text-overflow: ellipsis;
+color: white;
 
 text-shadow:
 0 0 8px
-rgba(199,166,255,.18);
+rgba(199,166,255,.2);
+
+overflow-wrap: anywhere;
 }
 
 
 .music-details p {
 
-margin-top: 3px;
-
-font-family: var(--sans);
-
-font-size: 7px;
+font-size: 8px;
 
 letter-spacing: 1px;
 
+margin-top: 3px;
+
 color:
-rgba(216,194,255,.45);
+rgba(216,194,255,.55);
 }
 
 
@@ -2749,30 +2871,24 @@ PLAY BUTTON
 
 .music-play-button {
 
-position: relative;
+width: 38px;
 
-width: 34px;
-height: 34px;
+height: 38px;
 
-flex:
-0 0
-34px;
-
-border:
-1px solid
-rgba(216,194,255,.4);
+flex-shrink: 0;
 
 border-radius: 50%;
 
-background:
-linear-gradient(
-145deg,
-#d8c2ff,
-#8b5dd1
-);
+border:
+1px solid
+rgba(199,166,255,.4);
 
-color:
-#160d25;
+background:
+rgba(155,108,255,.12);
+
+color: #eadfff;
+
+font-size: 13px;
 
 cursor: pointer;
 
@@ -2782,54 +2898,44 @@ align-items: center;
 
 justify-content: center;
 
-font-family:
-Arial,
-sans-serif;
-
-font-size: 10px;
-
-line-height: 1;
-
-padding: 0;
-
-box-shadow:
-
-0 0 8px
-rgba(155,108,255,.35),
-
-inset 0 1px 2px
-rgba(255,255,255,.35);
+padding-left: 2px;
 
 transition:
-transform .25s ease,
-box-shadow .25s ease;
+all .3s ease;
+
+box-shadow:
+0 0 10px
+rgba(155,108,255,.1);
 }
 
 
 .music-play-button:hover {
 
-transform:
-scale(1.08);
+transform: scale(1.08);
+
+border-color:
+var(--light-purple);
+
+background:
+rgba(155,108,255,.25);
 
 box-shadow:
-
 0 0 12px
-rgba(199,166,255,.7),
+rgba(155,108,255,.45),
 
 0 0 25px
-rgba(155,108,255,.3);
+rgba(155,108,255,.18);
 }
 
 
 .music-playing .music-play-button {
 
 box-shadow:
-
 0 0 12px
-rgba(199,166,255,.75),
+rgba(155,108,255,.45),
 
-0 0 24px
-rgba(155,108,255,.28);
+0 0 25px
+rgba(155,108,255,.18);
 }
 
 
@@ -2843,9 +2949,7 @@ position: relative;
 
 z-index: 2;
 
-margin-top: 9px;
-
-width: 100%;
+margin-top: 12px;
 }
 
 
@@ -2859,42 +2963,14 @@ appearance: none;
 
 -webkit-appearance: none;
 
-border: none;
+background:
+rgba(216,194,255,.12);
+
+border-radius: 10px;
 
 outline: none;
 
-border-radius: 10px;
-
 cursor: pointer;
-
-background:
-rgba(216,194,255,.12);
-}
-
-
-#progressBar::-webkit-slider-runnable-track {
-
-height: 3px;
-
-border-radius: 10px;
-
-background:
-linear-gradient(
-90deg,
-rgba(155,108,255,.9),
-rgba(199,166,255,.22)
-);
-}
-
-
-#progressBar::-moz-range-track {
-
-height: 3px;
-
-border-radius: 10px;
-
-background:
-rgba(216,194,255,.12);
 }
 
 
@@ -2905,48 +2981,38 @@ appearance: none;
 -webkit-appearance: none;
 
 width: 8px;
+
 height: 8px;
-
-margin-top: -2.5px;
-
-border:
-1px solid
-#d8c2ff;
 
 border-radius: 50%;
 
-background:
-#9b6cff;
+background: var(--light-purple);
 
 box-shadow:
-0 0 7px
-rgba(155,108,255,.8);
+0 0 6px var(--purple),
+0 0 12px var(--purple);
+
 }
 
 
 #progressBar::-moz-range-thumb {
 
 width: 8px;
+
 height: 8px;
 
-border:
-1px solid
-#d8c2ff;
+border: none;
 
 border-radius: 50%;
 
-background:
-#9b6cff;
+background: var(--light-purple);
 
 box-shadow:
-0 0 7px
-rgba(155,108,255,.8);
+0 0 6px var(--purple),
+0 0 12px var(--purple);
+
 }
 
-
-/* ============================================================
-TIME
-============================================================ */
 
 .music-time {
 
@@ -2954,148 +3020,105 @@ display: flex;
 
 justify-content: space-between;
 
-margin-top: 4px;
+margin-top: 5px;
 
-font-family: var(--sans);
+font-size: 7px;
 
-font-size: 6px;
+letter-spacing: .5px;
 
 color:
-rgba(216,194,255,.42);
+rgba(216,194,255,.45);
 }
 
 
 /* ============================================================
-PHONE DESIGN
+MUSIC ERROR
+============================================================ */
+
+.music-error {
+
+border-color:
+rgba(255,120,170,.35);
+
+}
+
+
+/* ============================================================
+MOBILE MUSIC PLAYER
 ============================================================ */
 
 @media (max-width: 700px) {
 
 .music-player {
 
-right: 12px;
-bottom: 12px;
+right: 16px;
 
-width:
-min(
-230px,
-calc(100% - 24px)
-);
+bottom: 16px;
 
-min-height: 76px;
+width: 265px;
 
-padding: 9px;
+padding: 14px;
 
-border-radius: 14px;
+border-radius: 16px;
+
 }
 
 
-.music-disc {
+.music-wave {
 
-width: 38px;
-height: 38px;
+margin-bottom: 8px;
 
-flex-basis: 38px;
 }
 
 
 .music-details h3 {
 
-font-size: 15px;
-}
+font-size: 16px;
 
-
-.music-details p {
-
-font-size: 6px;
-}
-
-
-.music-label {
-
-font-size: 5px;
-
-letter-spacing: 1.5px;
-}
-
-
-.music-play-button {
-
-width: 32px;
-height: 32px;
-
-flex-basis: 32px;
 }
 
 }
 
-
-/* ============================================================
-VERY SMALL PHONES
-============================================================ */
 
 @media (max-width: 400px) {
 
 .music-player {
 
 right: 9px;
+
 bottom: 9px;
 
-width:
-calc(100% - 18px);
+width: calc(100% - 18px);
 
-max-width: 220px;
+max-width: 250px;
 
-min-height: 70px;
+padding: 12px;
 
-padding: 8px;
-
-border-radius: 13px;
 }
 
 
 .music-disc {
 
-width: 34px;
-height: 34px;
+width: 42px;
 
-flex-basis: 34px;
-}
+height: 42px;
 
-
-.music-details h3 {
-
-font-size: 14px;
-}
-
-
-.music-details p,
-.music-label {
-
-font-size: 5px;
 }
 
 
 .music-play-button {
 
-width: 29px;
-height: 29px;
+width: 34px;
 
-flex-basis: 29px;
+height: 34px;
 
-font-size: 9px;
 }
 
 
-.music-progress-container {
+.music-details h3 {
 
-margin-top: 7px;
-}
+font-size: 15px;
 
-
-.music-time {
-
-font-size: 5px;
 }
 
 }
@@ -3107,7 +3130,8 @@ MUSIC REDUCED MOTION
 
 @media (prefers-reduced-motion: reduce) {
 
-.music-disc {
+.music-playing .music-disc,
+.music-playing .music-wave span {
 
 animation: none !important;
 
