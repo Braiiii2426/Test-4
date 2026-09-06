@@ -1,4 +1,3 @@
-```javascript
 // ============================================================
 // FOR YOU, AS ALWAYS
 // JavaScript
@@ -112,7 +111,7 @@ startScrollAnimations();
 // ============================================================
 // 4. EIGHT DIFFERENT FALLING EFFECTS
 // ============================================================
-//
+// 
 // Each effect has its own symbol, movement and behavior.
 //
 // 1. Hearts
@@ -705,31 +704,66 @@ glow.remove();
 
 function prepareMusicPlayer() {
 
-if (!backgroundMusic) return;
+if (
+!backgroundMusic ||
+!musicPlayer ||
+!musicPlayButton ||
+!progressBar ||
+!currentTimeDisplay ||
+!durationDisplay
+) {
+console.warn("Music player elements could not be found.");
+return;
+}
 
 backgroundMusic.volume = 1;
+
+musicPlayButton.textContent = "▶";
+
+
+// ============================================================
+// LOAD MUSIC INFORMATION
+// ============================================================
 
 backgroundMusic.addEventListener(
 "loadedmetadata",
 () => {
 
+if (
+isFinite(backgroundMusic.duration)
+) {
+
 durationDisplay.textContent =
-formatTime(backgroundMusic.duration);
+formatTime(
+backgroundMusic.duration
+);
+
+}
 
 }
 );
 
 
+// ============================================================
+// UPDATE PROGRESS
+// ============================================================
+
 backgroundMusic.addEventListener(
 "timeupdate",
 () => {
 
-if (!backgroundMusic.duration) return;
+if (
+!isFinite(backgroundMusic.duration) ||
+backgroundMusic.duration <= 0
+) {
+return;
+}
 
 const progress =
-(backgroundMusic.currentTime /
-backgroundMusic.duration) *
-100;
+(
+backgroundMusic.currentTime /
+backgroundMusic.duration
+) * 100;
 
 progressBar.value =
 progress;
@@ -742,6 +776,10 @@ backgroundMusic.currentTime
 }
 );
 
+
+// ============================================================
+// MUSIC PLAYING
+// ============================================================
 
 backgroundMusic.addEventListener(
 "play",
@@ -758,6 +796,10 @@ musicPlayButton.textContent =
 );
 
 
+// ============================================================
+// MUSIC PAUSED
+// ============================================================
+
 backgroundMusic.addEventListener(
 "pause",
 () => {
@@ -773,15 +815,44 @@ musicPlayButton.textContent =
 );
 
 
+// ============================================================
+// MUSIC ERROR
+// ============================================================
+
+backgroundMusic.addEventListener(
+"error",
+() => {
+
+console.error(
+"Music could not be loaded. Check that the MP3 filename exactly matches the file in GitHub."
+);
+
+musicPlayer.classList.add(
+"music-error"
+);
+
+musicPlayButton.textContent =
+"▶";
+
+}
+);
+
+
+// ============================================================
+// PLAY / PAUSE BUTTON
+// ============================================================
+
 musicPlayButton.addEventListener(
 "click",
-() => {
+async () => {
+
+try {
 
 if (backgroundMusic.paused) {
 
 backgroundMusic.volume = 1;
 
-backgroundMusic.play();
+await backgroundMusic.play();
 
 } else {
 
@@ -789,29 +860,60 @@ backgroundMusic.pause();
 
 }
 
+} catch (error) {
+
+console.error(
+"Music playback failed:",
+error
+);
+
+}
+
 }
 );
 
+
+// ============================================================
+// PROGRESS BAR
+// ============================================================
 
 progressBar.addEventListener(
 "input",
 () => {
 
-if (!backgroundMusic.duration) return;
+if (
+!isFinite(backgroundMusic.duration) ||
+backgroundMusic.duration <= 0
+) {
+return;
+}
 
 backgroundMusic.currentTime =
-(progressBar.value / 100) *
+(
+progressBar.value / 100
+) *
 backgroundMusic.duration;
 
 }
 );
 
+
+// Make sure the browser loads the MP3
+backgroundMusic.load();
+
 }
 
 
+// ============================================================
+// FORMAT TIME
+// ============================================================
+
 function formatTime(seconds) {
 
-if (!seconds || isNaN(seconds)) {
+if (
+!isFinite(seconds) ||
+seconds < 0
+) {
 return "0:00";
 }
 
@@ -824,7 +926,9 @@ Math.floor(seconds % 60);
 return (
 minutes +
 ":" +
-String(remainingSeconds).padStart(2, "0")
+String(
+remainingSeconds
+).padStart(2, "0")
 );
 
 }
@@ -851,5 +955,3 @@ String(remainingSeconds).padStart(2, "0")
 console.log(
 "💜 For You, As Always — website initialized."
 );
-```
-
