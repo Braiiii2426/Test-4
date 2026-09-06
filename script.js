@@ -111,7 +111,7 @@ startScrollAnimations();
 // ============================================================
 // 4. EIGHT DIFFERENT FALLING EFFECTS
 // ============================================================
-// 
+//
 // Each effect has its own symbol, movement and behavior.
 //
 // 1. Hearts
@@ -718,7 +718,8 @@ return;
 
 backgroundMusic.volume = 1;
 
-musicPlayButton.textContent = "▶";
+musicPlayButton.textContent =
+"▶";
 
 
 // ============================================================
